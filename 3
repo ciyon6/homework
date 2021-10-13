@@ -1,0 +1,17 @@
+size(450,250);
+background(0);
+//textSize(72);
+fill(0);
+
+String txt = "A picture of Dorian Grey";
+float ww = 0;
+for(int i = 0; i < txt.length(); i++){
+  char c = txt.charAt(i);
+  textSize(floor(random(23,25)));
+  int cl = int(c);
+  fill(cl);
+  text(c,ww,138);
+  fill(cl);
+  text(c,ww,157);
+  ww +=textWidth(c);
+}
