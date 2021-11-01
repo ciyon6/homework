@@ -1,0 +1,61 @@
+int BallsNum = 25;
+float spring = 0.07;
+float gravity = 0.08;
+float friction = -0.75;
+Ball[] balls = new Ball[BallsNum];
+
+void setup() {
+  size(600, 600);
+ 
+ for (int i = 0; i < BallsNum; i++) {
+    balls[i] = new Ball(random(width), random(height)
+                ,random(45, 80), i, balls);
+  }
+  noStroke();
+  fill(234, 214);
+}
+
+void draw() {
+  background(0);
+  for (Ball ball : balls) {
+    
+    ball.collide();
+    
+    ball.move();
+    
+    ball.display();
+  }
+}
+
+class Ball {
+ 
+  float x, y;
+ 
+  float diameter;
+  
+  float vx = 0;
+ 
+  float vy = 0;
+  
+  int id;
+ 
+  Ball[] others;
+ 
+ 
+  Ball(float xin, float yin, float din, int idin, Ball[] oin) {
+    x = xin;
+    y = yin;
+    diameter = din;
+    id = idin;
+    others = oin;
+  } 
+  
+  
+   void collide() {
+      for (int i = id + 1; i < BallsNum; i++) {
+       
+        float dx = others[i].x - x;
+        float dy = others[i].y - y;
+        float distance = sqrt(dx*dx + dy*dy);
+        
+        float minDist = others[i].diameter/2 + diameter/
